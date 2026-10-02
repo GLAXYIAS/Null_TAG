@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Null Tag</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  * { box-sizing: border-box; user-select: none; }
+  body {
+    margin: 0; min-height: 100vh;
+    background: #0b0314;
+    color: #e8e0ff;
+    font-family: 'Press Start 2P', system-ui, sans-serif;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  h1 {
+    font-size: 14px; margin: 16px 0 8px;
+    color: #c4b5fd; letter-spacing: 2px;
+  }
+  #wrap {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    justify-content: center; align-items: flex-start;
+    padding: 8px 12px 24px; max-width: 1100px;
+  }
+  canvas {
+    background: #12091c;
+    border: 3px solid #8b3dff;
+    border-radius: 8px;
+    image-rendering: pixelated;
+    max-width: 100%;
+  }
+  #panel {
+    width: 280px;
+    background: #140e24;
+    border: 2px solid #3b2d66;
+    border-radius: 10px;
+    padding: 14px;
+    font-size: 9px;
+    line-height: 1.7;
+  }
+  #panel h2 { font-size: 10px; color: #a78bfa; margin: 0 0 10px; }
+  label { display: block; margin: 8px 0 4px; color: #b3a1cf; }
+  select, input[type="number"] {
+    width: 100%;
+    background: #1c1433;
+    border: 1px solid #3b2d66;
+    color: #fff;
+    padding: 6px;
+    font-family: inherit;
+    font-size: 9px;
+    border-radius: 4px;
+  }
+  .row { display: flex; gap: 8px; }
+  .row > * { flex: 1; }
+  button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: inherit;
+    font-size: 9px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #8b3dff, #b370ff);
+    color: #fff;
+  }
+  button.secondary {
+    background: #251b40;
+    border: 1px solid #3b2d66;
+    color: #c4b5fd;
+  }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  #hud {
+    margin-top: 8px;
+    font-size: 9px;
+    color: #b3a1cf;
+    text-align: center;
+    min-height: 28px;
+  }
+  .keys {
+    font-size: 8px;
+    color: #8877aa;
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+  .keys b { color: #c4b5fd; }
+  #scores { margin-top: 10px; font-size: 8px; }
+  .score-line { margin: 4px 0; }
+</style>
+</head>
+<body>
+  <h1>NULL TAG</h1>
+  <div id="wrap">
+    <div>
+      <canvas id="c" width="720" height="480"></canvas>
+      <div id="hud">Press START ROUND</div>
+    </div>
+    <div id="panel">
+      <h2>LOBBY</h2>
+      <label>Players</label>
+      <select id="playerCount">
+        <option value="2">2 players</option>
+        <option value="3">3 players</option>
+        <option value="4" selected>4 players</option>
+      </select>
+      <label>Map</label>
+      <select id="mapSelect">
+        <option value="arena">Open Arena</option>
+        <option value="boxes">Box Maze</option>
+        <option value="halls">Cross Halls</option>
+        <option value="donut">Donut</option>
+      </select>
+      <label>Round length (seconds)</label>
+      <input type="number" id="roundTime" min="15" max="300" value="60" />
+      <label>Effects</label>
+      <select id="effectSelect">
+        <option value="none">None</option>
+        <option value="speed">Speed Surge (everyone faster)</option>
+        <option value="ice">Ice Floor (slippery)</option>
+        <option value="chaos">Chaos (random boosts)</option>
+        <option value="tiny">Tiny Mode (smaller hitboxes)</option>
+      </select>
+      <label>Who starts as IT</label>
+      <select id="itStart">
+        <option value="random" selected>Random</option>
+        <option value="0">Player 1 (blue)</option>
+        <option value="1">Player 2 (red)</option>
+        <option value="2">Player 3 (green)</option>
+        <option value="3">Player 4 (yellow)</option>
+      </select>
+      <div class="row">
+        <button id="btnStart">START ROUND</button>
+      </div>
+      <button class="secondary" id="btnReset">RESET SCORES</button>
+      <div id="scores"></div>
+      <div class="keys">
+        <div><b>P1</b> WASD</div>
+        <div><b>P2</b> TFGH</div>
+        <div><b>P3</b> IJKL</div>
+        <div><b>P4</b> Arrow keys</div>
+        <div style="margin-top:8px">IT has a red arrow overhead. Tag someone to pass IT.</div>
+      </div>
+    </div>
+  </div>
+<script src="game.js"></script>
+</body>
+</html>
